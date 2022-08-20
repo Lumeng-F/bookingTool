@@ -13,7 +13,7 @@
 
 <body>
   <div class="form">
-    <input class="cbtn" type="submit" value="客人" />
+    <input class="cbtn" type="submit" value="Customer" />
     <div id="table"></div>
   </div>
 
@@ -46,26 +46,26 @@
         { id: "id", hidden: true },
         {
           id: "name",
-          name: "名字",
+          name: "Name",
           sort: false,
           attributes: editableCellAttributes,
         },
-        { id: "phone", name: "电话", sort: false },
-        { id: "timeVisted", name: "消费次数" },
-        { id: "timeCancelled", name: "取消次数" },
+        { id: "phone", name: "Phone", sort: false },
+        { id: "timeVisted", name: "Time Visted" },
+        { id: "timeCancelled", name: "Time Cancelled" },
         {
           id: "avgSpent",
-          name: "平均消费",
+          name: "Avg Spent",
           formatter: (_, row) => `$${row.cells[5].data.toLocaleString()}`,
         },
         {
           id: "totalSpent",
-          name: "总共消费",
+          name: "Total Spent",
           formatter: (_, row) => `$${row.cells[6].data.toLocaleString()}`,
         },
         {
           id: "description",
-          name: "个人简介",
+          name: "Description",
           sort: false,
           attributes: editableCellAttributes,
         },
