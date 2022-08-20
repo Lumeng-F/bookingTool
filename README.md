@@ -10,5 +10,11 @@ A booking web app that have a lot of functionality
 
 
 # Functionalities
-1. ![alt text](https://github.com/Lumeng-F/bookingTook/blob/main/forREADME/sche.png?raw=true)
+### 1. Main schedule page for appointments
+<img src="/forREADME/sche.png" alt="Alt text" title="Optional title">
+### 2. Dayend page for pays based on duration and price tier
+<img src="/forREADME/dayend.png" alt="Alt text" title="Optional title">
+### 3. Customer page, the input box allow keyword search and sorting on several columns
+<img src="/forREADME/customer.png" alt="Alt text" title="Optional title">
+
 
