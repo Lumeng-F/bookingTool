@@ -10,4 +10,5 @@ A booking web app that have a lot of functionality
 
 
 # Functionalities
-1.
+1. ![alt text](https://github.com/Lumeng-F/bookingTook/blob/main/forREADME/sche.png?raw=true)
+
