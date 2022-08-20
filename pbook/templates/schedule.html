@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+{% block title %} PB-Schedule {% endblock %}
+{% block content %}
+<!-- Change Navbar -->
+<script>
+navitems = document.getElementsByClassName('nav__link')
+for (let i = 0; i < navitems.length; i ++){
+    navitems[i].classList.remove('active-link')
+}
+target = document.getElementById("0")
+target.classList.add('active-link')
+</script>
+
+
+
+<!-- input form for new appointment-->
+<form method="post" action="{{ url_for("schedulepage")}}" class="form">
+    <input class="cbtn" type="submit" value="预约">
+    <div class="grid one">
+      <input class="inputbox" name="sTime" required="required" type="datetime-local" value="{{ currTime }}" >
+    </div>
+
+    <!-- gird for appointment info -->
+    <div class="grid tre">
+        <select class="inputbox" name="gName">
+          {% for girl in girlList %}
+            <option value="{{girl}}">{{girl}}</option>
+          {% endfor %}
+        </select>
+
+        <select class="inputbox" name="dura" type="int">
+            <option value="30">30</option>
+            <option value="60">60</option>
+            <option value="70">70</option>
+            <option value="90">90</option>
+            <option value="120">120</option>
+        </select>
+
+        <input class="inputbox" name="cName" type="text" placeholder="客人姓名">
+        <!-- HTML is so fking shit, have to put two lines of js just to make it stop taking e/+/-,
+        and to force maxlength, not to mention the whole thing for autocomplete -->
+        <div>
+            <input class="inputbox" name="cNum"  type="number" id="inputphone"
+                   oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                   onkeydown="return ['Backspace','Delete'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"
+                   maxlength="10" placeholder="客人电话">
+            <ul class="list"></ul>
+        </div>
+
+        <select class="inputbox" name="device" type="text">
+          {% for device in deviceList %}
+            <option value="{{device}}">{{device}}</option>
+          {% endfor %}
+        </select>
+
+        <select class="inputbox" name="tier" required="required" type="number">
+            <option value="1">Tier One</option>
+            <option value="2">Tier Two</option>
+        </select>
+    </div>
+</form>
+<div class="errorBox">
+{% with msgs = get_flashed_messages() %}
+    {% for msg in msgs %}
+    <h4> {{ msg }}</h4>
+    {% endfor %}
+{% endwith %}
+ </div>
+<!-- div to display active girl name -->
+<div class="{{ colCount }}">
+    {% for girl in girlList %}
+        <h2>{{ girl }}</h2>
+    {% endfor %}
+</div>
+
+<!-- display appointment blocks -->
+<div class="{{ colCount }}">
+    {% for key in girlListDic %}
+      <div>
+      {% for appInfo in girlListDic[key] %}
+        <form method="post" action="{{ url_for("statuschange")}}">
+        <button name="appToCheck" value="{{ appInfo }}" class="{{appInfo[3]}}">
+          <h3 style="font-size: 20vm; text-wrap: normal">{{ appInfo[1].strftime('%H:%M') }} - {{ appInfo[2].strftime('%H:%M') }}</h3>
+          {% if appInfo[5] != '' %}
+            <h3>{{ appInfo[4] }} : {{ appInfo[5] }}</h3>
+          {% endif %}
+          <h3 style="font-size: smaller">{{ appInfo[6] }}</h3>
+        </button>
+        </form>
+      {% endfor %}
+      </div>
+    {% endfor %}
+</div>
+<!--Empty Space-->
+<a class="emptyspace">&nbsp</a>
+<!-- script for autocomplete phone# -->
+<script>
+// Copied from someone
+let phoneInt = {{ phoneList }}
+const phone = phoneInt.map(num => { return String(num);});
+let sortedPhones = phone.sort();
+
+//reference
+let input = document.getElementById("inputphone");
+
+//Execute function on keyup
+input.addEventListener("keyup", (e) => {
+  //loop through above array
+  //Initially remove all elements
+  removeElements();
+  for (let i of sortedPhones) {
+    if (
+      i.toLowerCase().startsWith(input.value) && input.value !== ""
+    ) {
+      //create li element
+      let listItem = document.createElement("li");
+      //One common class name
+      listItem.classList.add("list-items");
+      listItem.style.cursor = "pointer";
+      listItem.setAttribute("onclick", "displayPhones('" + i + "')");
+      //Display matched part in bold
+      let word = "<b>" + i.substr(0, input.value.length) + "</b>";
+      word += i.substr(input.value.length);
+      //display the value in array
+      listItem.innerHTML = word;
+      document.querySelector(".list").appendChild(listItem);
+    }
+  }
+});
+function displayPhones(value) {
+  input.value = value;
+  removeElements();
+}
+function removeElements() {
+  //clear all the item
+  let items = document.querySelectorAll(".list-items");
+  items.forEach((item) => {
+    item.remove();
+  });
+}
+</script>
+
+
+
+
+{% endblock %}

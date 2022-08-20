@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <!-- icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="static/icons/deer.png" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="static/style.css?vers=1" />
+    <link rel="stylesheet" href="static/cuspage.css?vers=1" />
+    <title>{% block title %} Pretty booking {% endblock %}</title>
+  </head>
+
+  <body>
+    <!-- NAVBAR -->
+    <nav class="nav">
+      <ul class="nav__list">
+        <a href="/schedule" class="nav__link" id="0">
+          <i class="ri-home-smile-2-line"></i>
+        </a>
+
+        <a href="/dayend" class="nav__link" id="1">
+          <i class="ri-pie-chart-line"></i>
+        </a>
+
+        <a href="/customer" class="nav__link" id="2">
+          <i class="ri-group-line"></i>
+        </a>
+
+        <a href="/setting" class="nav__link" id="3">
+          <i class="ri-settings-3-line"></i>
+        </a>
+        <svg
+          class="indicator"
+          width="94"
+          height="56"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <ellipse cx="25" cy="20" rx="20" ry="20"></ellipse>
+        </svg>
+      </ul>
+    </nav>
+
+    <main>{% block content %}{% endblock %}</main>
+  </body>
+</html>

@@ -1,0 +1,136 @@
+{% extends "layout.html" %}
+{% block title %} PB-Setting {% endblock %}
+{% block content %}
+<script>
+  navitems = document.getElementsByClassName("nav__link");
+  for (let i = 0; i < navitems.length; i++) {
+    navitems[i].classList.remove("active-link");
+  }
+  target = document.getElementById("3");
+  target.classList.add("active-link");
+</script>
+<style>
+  body {
+    background-color: white;
+    padding: 1%;
+  }
+
+</style>
+<!--TODO Allow users to add more lines-->
+<form method="post" action="">
+  {{ form.submit(class="cbtn") }}
+  <div class="grid for" id="girldiv">
+    {{ form.g1(class="inputbox", value=girlList[0] ) }}
+    {{ form.g2(class="inputbox", value=girlList[1] ) }}
+    {{ form.g3(class="inputbox", value=girlList[2] ) }}
+    {{ form.g4(class="inputbox", value=girlList[3] ) }}
+    {{ form.d1(class="inputbox", value=deviceList[0]) }}
+    {{ form.d2(class="inputbox", value=deviceList[1]) }}
+    {{ form.d3(class="inputbox", value=deviceList[2]) }}
+    {{ form.d4(class="inputbox", value=deviceList[3]) }}
+  </div>
+
+  <div class="tbl-header">
+    <table>
+      <thead>
+        <tr>
+          <th>Tier1</th>
+          <th>Charge</th>
+          <th>Store</th>
+          <th>Girl</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table>
+      <tbody>
+        <tr>
+          <td>30</td>
+          <td>{{ form.t130(class="inputbox", value=t1Price['30'][0])}}</td>
+          <td>{{ form.t130Comp(class="inputbox", value=t1Price['30'][1]) }}</td>
+          <td>{{ t1Price['30'][2] }}</td>
+        </tr>
+        <tr>
+          <td>60</td>
+          <td>{{ form.t160(class="inputbox", value=t1Price['60'][0]) }}</td>
+          <td>{{ form.t160Comp(class="inputbox", value=t1Price['60'][1]) }}</td>
+          <td>{{ t1Price['60'][2] }}</td>
+        </tr>
+        <tr>
+          <td>70</td>
+          <td>{{ form.t170(class="inputbox", value=t1Price['70'][0]) }}</td>
+          <td>{{ form.t170Comp(class="inputbox", value=t1Price['70'][1]) }}</td>
+          <td>{{ t1Price['70'][2] }}</td>
+        </tr>
+        <tr>
+          <td>90</td>
+          <td>{{ form.t190(class="inputbox", value=t1Price['90'][0]) }}</td>
+          <td>{{ form.t190Comp(class="inputbox", value=t1Price['90'][1]) }}</td>
+          <td>{{ t1Price['90'][2] }}</td>
+        </tr>
+        <tr>
+          <td>120</td>
+          <td>{{ form.t1120(class="inputbox", value=t1Price['120'][0]) }}</td>
+          <td>
+            {{ form.t1120Comp(class="inputbox", value=t1Price['120'][1]) }}
+          </td>
+          <td>{{ t1Price['120'][2] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tbl-header">
+    <table>
+      <thead>
+        <tr>
+          <th>Tier2</th>
+          <th>Charge</th>
+          <th>Store</th>
+          <th>Girl</th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table>
+      <tbody>
+        <tr>
+          <td>30</td>
+          <td>{{ form.t230(class="inputbox", value=t2Price['30'][0]) }}</td>
+          <td>{{ form.t230Comp(class="inputbox", value=t2Price['30'][1]) }}</td>
+          <td>{{ t2Price['30'][2] }}</td>
+        </tr>
+        <tr>
+          <td>60</td>
+          <td>{{ form.t260(class="inputbox", value=t2Price['60'][0]) }}</td>
+          <td>{{ form.t260Comp(class="inputbox", value=t2Price['60'][1]) }}</td>
+          <td>{{ t2Price['60'][2] }}</td>
+        </tr>
+        <tr>
+          <td>70</td>
+          <td>{{ form.t270(class="inputbox", value=t2Price['70'][0]) }}</td>
+          <td>{{ form.t270Comp(class="inputbox", value=t2Price['70'][1]) }}</td>
+          <td>{{ t2Price['70'][2] }}</td>
+        </tr>
+        <tr>
+          <td>90</td>
+          <td>{{ form.t290(class="inputbox", value=t2Price['90'][0]) }}</td>
+          <td>{{ form.t290Comp(class="inputbox", value=t2Price['90'][1]) }}</td>
+          <td>{{ t2Price['90'][2] }}</td>
+        </tr>
+        <tr>
+          <td>120</td>
+          <td>{{ form.t2120(class="inputbox", value=t2Price['120'][0]) }}</td>
+          <td>
+            {{ form.t2120Comp(class="inputbox", value=t2Price['120'][1]) }}
+          </td>
+          <td>{{ t2Price['120'][2] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</form>
+<!--Empty Space-->
+<a class="emptyspace">&nbsp</a>
+{% endblock %}

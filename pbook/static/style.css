@@ -1,0 +1,278 @@
+@import url("https://fonts.googleapis.com/css2?family=Cousine&display=swap");
+/*=============== VARIABLES CSS ===============*/
+:root {
+  /* navbar color */
+  --container-color: rgb(255, 255, 255);
+  --body-font: 'Cousine','Microsoft JhengHei', sans-serif;
+}
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+
+}
+
+body {
+  font-family: var(--body-font);
+  color: #000000;
+  overflow-x: hidden;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+/*Remove the property of 100vh, when inserting its content*/
+.container section {
+  height: 100vh;
+  padding: 2rem 0;
+}
+
+
+.nav {
+  position: fixed;
+  bottom: 0.5rem;
+  left: 0;
+  right: 0;
+  width: 300px;
+  height: 70px;
+  /* navbar color */
+  background-color: var(--container-color);
+  margin: 0 auto;
+  /*padding: 1.5rem .5rem;*/
+  z-index: 0;
+  border-radius: 2rem;
+}
+
+.nav__list {
+  display: flex;
+  padding: 7%;
+  justify-content: center;
+  column-gap: 15%;
+}
+
+.nav__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav__link i {
+  font-size: 1.5rem;
+  /* icon color when not selected */
+  color: rgb(0, 0, 0);
+  z-index: 1;
+}
+
+/* Indicator link */
+.indicator {
+  position: absolute;
+  /*left: 5px;*/
+  left: 10%;
+  bottom: 0;
+  /* indicator color */
+  fill: rgb(0, 0, 0);
+  /*transition: .5s;*/
+}
+
+/* Active link */
+.active-link i {
+  color: #ffffff;
+}
+
+/* Move indicator */
+.nav__link:nth-child(1).active-link ~ .indicator {
+  /*transform: translateX(calc(28px ));*/
+  left: 10%;
+}
+
+.nav__link:nth-child(2).active-link ~ .indicator {
+  /*transform: translateX(calc(85px * 1));*/
+  left: 31%;
+}
+
+.nav__link:nth-child(3).active-link ~ .indicator {
+  /*transform: translateX(calc(70px * 2));*/
+  left: 52%;
+}
+
+.nav__link:nth-child(4).active-link ~ .indicator {
+  /*transform: translateX(calc(65.5px * 3));*/
+  left: 73%;
+}
+/* ============ Appoint Buttons ============ */
+.apbtn{
+  align-items: stretch;
+  width: 95%;
+  border: 2px solid;
+  font-family: var(--body-font), monospace;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: #000000;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  font-weight: 700;
+  height: 80px;
+  justify-content: center;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-decoration: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 3%;
+  padding: 1%;
+}
+.apbtn.default {
+  background: #ffffff url("icons/default.png") no-repeat 90% 90%;
+  background-size: 20px 20px;
+  border: 3px solid #48E6E6;
+}
+.apbtn.cancel {
+  background: #ffffff url("icons/cancel.png") no-repeat 90% 90%;
+  background-size: 15px 15px;
+  border: 3px solid #E02E58;
+}
+.apbtn.done {
+  background: #ffffff url("icons/done.png") no-repeat 90% 90%;
+  background-size: 20px 20px;
+  border: 3px solid #48E65D;
+}
+h3{
+  font-size: 100%;
+  color: #000000;
+}
+
+
+/* ============ Click Buttons ============ */
+.cbtn {
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 20px;
+  border:none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 3em;
+  width: 50%;
+  font-size: large;
+  font-weight: bold;
+  font-family: var(--body-font);
+  margin: 2% 25% 3%;
+}
+
+
+/* Form Test */
+.form{
+  background: #ffffff;
+  padding: 1%;
+}
+
+/* ============ Grid (could be better done with js probably ============ */
+.grid{
+  font-family: var(--body-font), monospace;
+  display: grid;
+  text-align: center;
+  grid-column-gap: 1%;
+  grid-row-gap: 5px;
+  border-radius: 10px;
+  scroll-padding-block-end: 5%;
+  padding-left: 1%;
+  padding-bottom: 1%;
+}
+.grid.one{grid-template-columns: repeat(1, 98%);
+}
+.grid.two{grid-template-columns: repeat(2, 48.5%);
+}
+.grid.tre{grid-template-columns: repeat(3, 32%);
+}
+.grid.for{grid-template-columns: repeat(4, 24%);
+  scroll-padding-block-end: 5%;
+}
+
+.emptyspace{
+  padding-bottom: 19%;
+}
+
+/* ============ Input Box ============ */
+
+.inputbox{
+  font-family: var(--body-font);
+  -webkit-appearance: none;
+  -webkit-border-radius: 5px;
+  left: 5%;
+  right: 5%;
+  border: none;
+  width: 100%;
+}
+
+/* ============ General Fields ============ */
+::placeholder{
+  text-align: center;
+}
+input{
+  text-align: center;
+}
+select{
+  text-align: center;
+}
+
+.list {
+  width: 100%;
+  font-size: 15px;
+  background-color: #ffffff;
+  padding: 2px 1px;
+}
+
+
+/* ============ Table Fields ============ */
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+.tbl-header {
+  background-color: #000000;
+}
+.tbl-content {
+  height: 100%;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+th {
+  padding: 10px 10px;
+  text-align: center;
+  font-weight: 800;
+  font-size: 11px;
+  color: #f6f6f6;
+  text-transform: uppercase;
+}
+td {
+  padding: 11px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 500;
+  font-size: 13px;
+  color: #000000;
+}
+
+.errorBox{
+  background-color: #ea4378;
+  opacity: 0.8;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 1%;
+  text-align: center;
+  font-size: 4vw;
+  border-radius: 15px;
+}

@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block title %} PB-Dayend {% endblock %}
+{% block content %}
+<script>
+navitems = document.getElementsByClassName('nav__link')
+for (let i = 0; i < navitems.length; i ++){
+    navitems[i].classList.remove('active-link')
+}
+target = document.getElementById("1")
+target.classList.add('active-link')
+</script>
+<!-- Page specific style -->
+<style>
+  body {
+    background-color: white;
+    padding: 1%;
+  }
+  img{max-width: 100%;}
+  button{
+      background-color: #FFFFFF;
+      border: none;
+      max-width: 4%;
+      margin-left: 48%;
+      margin-right: 48%;
+  }
+</style>
+<!-- Top buttom to clear out all appoint info and save customer info -->
+<form method="post" action="{{ url_for("saveCusInfo")}}">
+    <input class="cbtn" type="submit" value="结余">
+</form>
+<form method="post" action="" >
+    <button name="changeTier" onclick="this.form.submit()">
+        <img src="../static/icons/ctier.png" alt="">
+    </button>
+</form>
+
+<!-- Display total revenue and actual profit -->
+<div class="grid two">
+    <h3>Charged</h3>
+    <h3>Revenue</h3>
+    <h3>$ {{ dayCharged }}</h3>
+    <h3>$ {{ dayEarned }}</h3>
+</div>
+<!-- generate pays -->
+{% for key in girlPayDic.keys() %}
+{% if girlPayDic[key]['Girl Total'] != 0 %}
+    <div class="tbl-header">
+        <table>
+            <thead>
+            <tr>
+                <th>{{ key }}</th>
+                <th>Duration</th>
+                <th>Store</th>
+                <th>Girl</th>
+                <th>Store Total</th>
+                <th>Girl Total</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="tbl-content">
+        <table>
+            <tbody>
+                <tr>
+                <td>30</td>
+                <td>  {{girlPayDic[key]['30'][0]}}</td>
+                <td>$ {{girlPayDic[key]['30'][1]}}</td>
+                <td>$ {{girlPayDic[key]['30'][2]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['30'][3]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['30'][4]}}</td>
+              </tr>
+              <tr>
+                <td>60</td>
+                <td>{{girlPayDic[key]['60'][0]}}</td>
+                <td>$ {{girlPayDic[key]['60'][1]}}</td>
+                <td>$ {{girlPayDic[key]['60'][2]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['60'][3]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['60'][4]}}</td>
+              </tr>
+              <tr>
+                <td>70</td>
+                <td>{{girlPayDic[key]['70'][0]}}</td>
+                <td>$ {{girlPayDic[key]['70'][1]}}</td>
+                <td>$ {{girlPayDic[key]['70'][2]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['70'][3]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['70'][4]}}</td>
+              </tr>
+              <tr>
+                <td>90</td>
+                <td>{{girlPayDic[key]['90'][0]}}</td>
+                <td>$ {{girlPayDic[key]['90'][1]}}</td>
+                <td>$ {{girlPayDic[key]['90'][2]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['90'][3]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['90'][4]}}</td>
+              </tr>
+              <tr>
+                <td>120</td>
+                <td>{{girlPayDic[key]['120'][0]}}</td>
+                <td>$ {{girlPayDic[key]['120'][1]}}</td>
+                <td>$ {{girlPayDic[key]['120'][2]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['120'][3]}}</td>
+                <td style="font-weight: 900">$ {{girlPayDic[key]['120'][4]}}</td>
+              </tr>
+              <tr>
+                <td>总计</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td style="font-weight: 900; font-size: 12px">$ {{girlPayDic[key]['Comp Total']}}</td>
+                <td style="font-weight: 900; font-size: 12px">$ {{girlPayDic[key]['Girl Total']}}</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+{% endif %}
+{% endfor %}
+
+<!--Empty Space-->
+<a class="emptyspace">&nbsp</a>
+{% endblock %}

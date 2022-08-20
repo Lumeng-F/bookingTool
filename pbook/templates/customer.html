@@ -1,0 +1,177 @@
+{% extends "layout.html" %}
+{% block title %} PB-Customers {% endblock %}
+{% block content %}
+
+<script>
+  navitems = document.getElementsByClassName("nav__link");
+  for (let i = 0; i < navitems.length; i++) {
+    navitems[i].classList.remove("active-link");
+  }
+  target = document.getElementById("2");
+  target.classList.add("active-link");
+</script>
+
+<body>
+  <div class="form">
+    <input class="cbtn" type="submit" value="客人" />
+    <div id="table"></div>
+  </div>
+
+  <script src="../static/cuspage.js"></script>
+  <script>
+    const tableDiv = document.getElementById("table");
+    let rowCol = Math.round(screen.height / 80);
+    console.log(rowCol);
+    const updateUrl = (prev, query) => {
+      return (
+        prev +
+        (prev.indexOf("?") >= 0 ? "&" : "?") +
+        new URLSearchParams(query).toString()
+      );
+    };
+
+    const editableCellAttributes = (data, row, col) => {
+      if (row) {
+        return {
+          contentEditable: "true",
+          "data-element-id": row.cells[0].data,
+        };
+      } else {
+        return {};
+      }
+    };
+
+    new gridjs.Grid({
+      columns: [
+        { id: "id", hidden: true },
+        {
+          id: "name",
+          name: "名字",
+          sort: false,
+          attributes: editableCellAttributes,
+        },
+        { id: "phone", name: "电话", sort: false },
+        { id: "timeVisted", name: "消费次数" },
+        { id: "timeCancelled", name: "取消次数" },
+        {
+          id: "avgSpent",
+          name: "平均消费",
+          formatter: (_, row) => `$${row.cells[5].data.toLocaleString()}`,
+        },
+        {
+          id: "totalSpent",
+          name: "总共消费",
+          formatter: (_, row) => `$${row.cells[6].data.toLocaleString()}`,
+        },
+        {
+          id: "description",
+          name: "个人简介",
+          sort: false,
+          attributes: editableCellAttributes,
+        },
+      ],
+
+      server: {
+        url: "/api/data",
+        then: (results) => results.data,
+        total: (results) => results.total,
+      },
+      search: {
+        enabled: true,
+        server: {
+          url: (prev, search) => {
+            return updateUrl(prev, { search });
+          },
+        },
+      },
+      sort: {
+        enabled: true,
+        multiColumn: true,
+        server: {
+          url: (prev, columns) => {
+            const columnIds = [
+              "id",
+              "name",
+              "phone",
+              "timeVisted",
+              "timeCancelled",
+              "avgSpent",
+              "totalSpent",
+              "description",
+            ];
+            const sort = columns.map(
+              (col) => (col.direction === 1 ? "+" : "-") + columnIds[col.index]
+            );
+            return updateUrl(prev, { sort });
+          },
+        },
+      },
+      <!-- change style here -->
+      autoWidth: false,
+      style: {
+        search: {
+          width: "100%",
+        },
+        td: {
+          border: "none",
+          autoWidth: "false",
+        },
+        table: {
+          "text-align": "center",
+        },
+        th: {
+          color: "#ffffff",
+          "background-color": "rgb(0,0,0)",
+          border: "none",
+        },
+      },
+      pagination: {
+        enabled: true,
+        limit: rowCol,
+        summary: false,
+        server: {
+          url: (prev, page, limit) => {
+            return updateUrl(prev, { start: page * limit, length: limit });
+          },
+        },
+      },
+    }).render(tableDiv);
+
+    let savedValue;
+
+    tableDiv.addEventListener("focusin", (ev) => {
+      if (ev.target.tagName === "TD") {
+        savedValue = ev.target.textContent;
+      }
+    });
+
+    tableDiv.addEventListener("focusout", (ev) => {
+      if (ev.target.tagName === "TD") {
+        if (savedValue !== ev.target.textContent) {
+          fetch("/api/data", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: ev.target.dataset.elementId,
+              [ev.target.dataset.columnId]: ev.target.textContent,
+            }),
+          });
+        }
+        savedValue = undefined;
+      }
+    });
+
+    tableDiv.addEventListener("keydown", (ev) => {
+      if (ev.target.tagName === "TD") {
+        if (ev.key === "Escape") {
+          ev.target.textContent = savedValue;
+          ev.target.blur();
+        } else if (ev.key === "Enter") {
+          ev.preventDefault();
+          ev.target.blur();
+        }
+      }
+    });
+  </script>
+</body>
+{% endblock %}
