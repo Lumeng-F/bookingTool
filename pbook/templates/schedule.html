@@ -15,7 +15,7 @@ target.classList.add('active-link')
 
 <!-- input form for new appointment-->
 <form method="post" action="{{ url_for("schedulepage")}}" class="form">
-    <input class="cbtn" type="submit" value="预约">
+    <input class="cbtn" type="submit" value="Appointment">
     <div class="grid one">
       <input class="inputbox" name="sTime" required="required" type="datetime-local" value="{{ currTime }}" >
     </div>
@@ -36,14 +36,14 @@ target.classList.add('active-link')
             <option value="120">120</option>
         </select>
 
-        <input class="inputbox" name="cName" type="text" placeholder="客人姓名">
+        <input class="inputbox" name="cName" type="text" placeholder="Customer Name">
         <!-- HTML is so fking shit, have to put two lines of js just to make it stop taking e/+/-,
         and to force maxlength, not to mention the whole thing for autocomplete -->
         <div>
             <input class="inputbox" name="cNum"  type="number" id="inputphone"
                    oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                    onkeydown="return ['Backspace','Delete'].includes(event.code) ? true : !isNaN(Number(event.key)) && event.code!=='Space'"
-                   maxlength="10" placeholder="客人电话">
+                   maxlength="10" placeholder="Customer Phone">
             <ul class="list"></ul>
         </div>
 
